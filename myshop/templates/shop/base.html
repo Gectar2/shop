@@ -1,0 +1,351 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>{% block title %}Мой магазин{% endblock %}</title>
+<link rel="stylesheet">
+</head>
+<body>
+<style>
+    @import url(http://fonts.googleapis.com/css?family=Ubuntu);
+
+body {
+    margin:0;
+    padding:0;
+    font-family:helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5 , h6 {
+    font-family: 'Ubuntu', sans-serif; font-weight:normal;
+}
+
+a {
+    text-decoration:none;
+    color:#000;
+}
+
+
+a.button, input[type="submit"] {
+    color:#000;
+    background:#EEDFB8;
+    border-radius:4px;
+    padding:10px 20px;
+    font-size:14px;
+    border:0;
+}
+
+a.button.light {
+    color:#000;
+    background:#EEDFB8;
+}
+
+
+table.cart {
+    margin-bottom:40px;
+}
+
+table.cart img {
+    width:280px;
+}
+
+
+
+td input[type="submit"] {
+    font-size:12px;
+    padding:4px 10px;
+}
+
+form p label, form p input {
+    float:left;
+    clear:both;
+}
+
+form p label {
+    font-size:14px;
+    padding-bottom:4px;
+}
+
+form p input {
+    width:300px;
+    font-size:13px;
+    margin-bottom:10px;
+    padding:10px 12px;
+    border:0;
+    background:#EEDFB8;
+    color:#000;
+    border-radius:4px;
+}
+
+ul.errorlist {
+   float:left;
+   color:#ff0000;
+   clear:both;
+   font-size:13px;
+   margin:0;
+   padding:0;
+}
+
+
+#header {
+    padding:10px 100px;
+    font-size:18px;
+
+}
+
+
+
+#header .logo {
+    font-family: 'Ubuntu', sans-serif;
+    float:left;
+    color:#333;
+    font-size:22px;
+    margin-right:10%;
+}
+
+
+#content {
+    padding:0 100px;
+    overflow:hidden;
+}
+
+#sidebar {
+    width:220px;
+    padding:30px 20px 0 0;
+    float:left;
+}
+
+#sidebar ul{
+    margin:0;
+    padding:0;
+}
+
+#sidebar ul li {
+    margin:0;
+    list-style:none;
+    padding:10px 14px;
+}
+
+#sidebar ul li a {
+    display:block;
+}
+
+#sidebar ul li.selected {
+    background:#EEDFB8;
+    border-radius:4px;
+}
+
+#sidebar ul li.selected a {
+    color:#000;
+}
+
+#main {
+    float:left;
+    width: 96%;
+    margin-right:-220px;
+    overflow:hidden;
+}
+
+
+
+.product-list .item img {
+    width:100%;
+    margin-bottom:8px;
+}
+
+.product-detail {
+    text-align:justify;
+}
+
+.product-detail .price {
+    color:#000;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.product-detail img {
+    width:40%;
+    float:left;
+    padding:0 20px 20px 0;
+}
+
+.product-detail h1 {
+    margin-bottom:0;
+}
+
+.product-detail h2 {
+    margin-top:10px;
+}
+
+.order-form {
+    float:left;
+}
+
+.order-info {
+    float:right;
+    width:300px;
+    background:#EEDFB8;
+    padding:10px 20px;
+    color:#000;
+    border-bottom:4px solid #5993bb;
+}
+
+.order-info h3 {
+    color:#5993bb;
+}
+
+.order-info ul li {
+    margin:0;
+    padding:0;
+    font-size:14px;
+}
+
+.order-info p {
+    font-weight:bold;
+    float:right;
+}
+
+.order-info span {
+    float:right;
+}
+
+.neg {
+    color:#dc1616;
+}
+
+.languages {
+   float:right;
+   padding-top:4px;
+   font-size:14px;
+}
+
+.languages ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+    float:left;
+}
+
+.languages ul li {
+    float:left;
+    margin:0 0 0 10px;
+    font-size:14px;
+}
+
+.languages p {
+    float:left;
+    margin:0;
+}
+
+.recommendations {
+    clear:both;
+}
+
+.recommendations div {
+    float:left;
+}
+
+.recommendations img {
+    width:200px
+}
+
+.recommendations p {
+    clear:both;
+}
+
+.recommendations.cart {
+    width:60%;
+    float:left;
+    overflow:auto;
+}
+
+.recommendations.cart h3 {
+    margin-top:0;
+}
+
+.recommendations.cart .item {
+    margin-right:10px;
+}
+
+.recommendations.cart img {
+    width:120px;
+}
+
+/* braintree hosted fields */
+form div.field {
+    font-size:13px;
+    color:#666;
+    width:300px;
+    height:22px;
+    margin-bottom:10px;
+    padding:6px 12px;
+    border:0;
+    background:#efefef;
+    color:#666;
+    border-radius:4px;
+}
+footer{
+position: static;
+
+height: 366px;
+left: 0px;
+bottom: 0px;
+
+background: #000000;
+}
+</style>
+<header style=" padding:10px 100px;font-size:18px;">
+<a href="/" class="logo"><img src="https://github.com/danila-1234/danila-1234.github.io/blob/master/%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF%20%D1%81%20%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%BE%D0%BC.png?raw=true">
+</a>
+<a href="#" style="position: absolute;
+width: auto;
+height: 35px;
+left: 726px;
+top: 46px;
+
+filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.25));"></a>
+
+
+    <a href="{% url 'cart:cart_detail' %}"><img src="https://danila-1234.github.io/Group%2024.png" style="position: absolute;
+width: 148px;
+height: 34px;
+left: 1026px;
+top: 36px;
+filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.25));"></a>
+</header>
+<hr>
+<div id="content">
+{% block content %}{% endblock %}
+</div>
+<footer>
+    <h2 style="position: absolute;
+width: 521.17px;
+height: 324.03px;
+left: 763px;
+
+
+font-family: 'Century Gothic';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 28px;
+
+color: #FFFFFF;"><br>Адрес:<br>
+141701, Московская область, г. Долгопрудный, пл. Собина, д. 1<br>
+<br>Телефон:<br>
++7 (495) 369-45-93<br>
++7 (977) 758-71-25<br><br>Почта:<br>
+mo_fiztechkoll@mosreg.ru</h2>
+    <div style="position: absolute; left: 155px;"><br><br><h2 style="
+font-family: 'Century Gothic';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 29px;
+
+color: #FFFFFF;">Мы на карте:</h2><br>
+<div style="position: relative;overflow:hidden;"><a href="https://yandex.ru/maps/org/gbpou_mo_fiztekh_kolledzh/1108017159/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">ГБПОУ МО Физтех-колледж</a><a href="https://yandex.ru/maps/214/dolgoprudniy/category/college/184106236/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">Колледж в Долгопрудном</a><a href="https://yandex.ru/maps/214/dolgoprudniy/category/further_education/184106162/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:28px;">Дополнительное образование в Долгопрудном</a><iframe src="https://yandex.ru/map-widget/v1/-/CCUZZOSKgC" width="360" height="200" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
+</div>
+</footer>
+</body>
+</html>

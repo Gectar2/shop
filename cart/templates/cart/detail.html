@@ -1,0 +1,168 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}
+  Корзина покупок
+{% endblock %}
+
+{% block content %}
+<h1 xmlns="http://www.w3.org/1999/html">Корзина покупок</h1>
+<div style="background: #FFFFFF;
+box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.25); width: 80%; display:inline-block;">
+
+      {% for item in cart %}
+        {% with product=item.product %}
+    <div style="width:90%;
+    border-spacing:0;
+    border-collapse: collapse;  display:inline-block;  margin: 10px 10px 10px 10px;">
+              <a href="{{ product.get_absolute_url }}" style="float:left;">
+              <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" style="width:280px; height: 200px; padding: 20px 20px 20px 20px;">
+              </a>
+        <table>
+        <thead>
+        <th><h1 style="padding: 0 20px 20px 20px; vertical-align: center;">{{ product.name }}</h1></th>
+        <th style="width: 500px; padding: 20px 0px 0px 0px;"><div><div style="float:left;position: static; vertical-align: center;"><form action="{% url 'cart:cart_add' product.id %}" method="post" style="float:left; position: relative;">
+                  {{ item.update_quantity_form.quantity }}
+                  {{ item.update_quantity_form.update }}<input type="submit" value="Обновить">
+                  {% csrf_token %}
+              </form></div></div></th>
+        <th style="width: 100px; float: left; padding: 0px 0px 0px 0px; margin: 50px 0 0 0">{{ product.price }} ₽</th>
+        <th style="width: 100px"><div style="border-radius: 20px; background: FF0000; width: 24px;
+height: 24px;float:right;"><a href="{% url 'cart:cart_remove' product.id %}">Удалить товар</a></div></th>
+        </thead>
+        <tbody>
+        <tr>
+
+        </tr>
+        </tbody>
+
+
+
+
+  </table></div>
+
+        {% endwith %}
+      {% endfor %}
+</div>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box}
+/* Full-width input fields */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+/* Add a background color when the inputs get focus */
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+button:hover {
+    opacity:1;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+    padding: 14px 20px;
+    background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+    padding: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: #474e5d;
+    padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+    margin-bottom: 25px;
+}
+
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+    color: #f44336;
+    cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+    .cancelbtn, .signupbtn {
+       width: 100%;
+    }
+}
+</style>
+<div style="background: #FFFFFF; text-align: center; vertical-align: top;
+box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.25); width: 15%;height: 170px; border-collapse: collapse;  display:inline-block; ">
+    <div><h3>Итого:   {{ cart.get_total_price }} ₽</h3></div>
+    <div>{% with total_items=cart|length %}
+<h3>Кол-во товаров: {{ total_items }} </h3>{% endwith %}</div>
+
+
+
+
+<a href="/cart/forma">Оформить заказ</a>
+</div>
+
+{% endblock %}

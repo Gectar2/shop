@@ -1,0 +1,85 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+{% if category %}{{ category.name }}{% else %}Товары{% endif %}
+{% endblock %}
+{% block content %}
+<div id="sidebar">
+
+<div class="dropdown">
+  <button class="dropbtn"><h3>Категории</h3></button>
+  <div class="dropdown-content">
+    <ul>
+<li {% if not category %}class="selected"{% endif %}>
+<a href="{% url 'shop:product_list' %}">Все</a>
+</li>
+{% for c in categories %}
+<li {% if category.slug == c.slug %}class="selected" {% endif %}>
+<a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+</li>
+{% endfor %}
+</ul>
+  </div>
+</div>
+
+
+</div>
+<style>
+    .dropbtn {
+  color: black;
+  background-color:#fff;
+  font-size: 16px;
+  border: none;
+}
+
+/* Контейнер <div> - необходим для размещения выпадающего содержимого */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Выпадающее содержимое (скрыто по умолчанию) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Ссылки внутри выпадающего списка */
+.dropdown-content li {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Показать выпадающее меню при наведении курсора */
+.dropdown:hover .dropdown-content {display: block;}
+
+.item{
+width: 250px;
+border: 2px solid black;
+box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.24);
+padding: 20px 20px 20px 20px;
+margin: 20px;
+text-align: center;
+line-height:1;
+float:left;
+}
+</style>
+<div id="main" class="product-list">
+<h1>{% if category %}{{ category.name }}{% else %}Товары{% endif %}</h1>
+{% for product in products %}
+<div class="item">
+<a href="{{ product.get_absolute_url }}">
+    <img src="{% if product.image %}{{ product.image.url }}{%else %}{% static 'img/no_image.png' %}{% endif %}" style="padding: 20px 20px 20px 20px; width: 210px; height: 170px; text-align: center;">
+</a>
+    <h1>{{ product.price }} ₽ </h1><br>
+<a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+</div>
+{% endfor %}
+</div>
+{% endblock %}
