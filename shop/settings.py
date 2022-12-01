@@ -21,10 +21,10 @@ CART_SESSION_ID = 'cart'
 SECRET_KEY = 'django-insecure-naw*6%h&48kzgh)eaz3^om_f#*o6y%xj(k&o9%8b3kb(h=v0vg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['3d-hub.phystech.pro', '192.168.88.28', 'localhost']
+CSRF_TRUSTED_ORIGINS = ['http://3d-hub.phystech.pro']
 
 # Application definition
 
@@ -119,7 +119,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 #tttt
